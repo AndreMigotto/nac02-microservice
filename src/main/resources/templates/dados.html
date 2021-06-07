@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Valores</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstraptheme.min.css}"
+	rel="stylesheet" />
+
+<style>
+.logo-container {
+	background-color: #000000;
+	color: #fff;
+}
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="/"> <img
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRzgAuc9onDm8VY52KgPLrpDwqOidX4UaoO-To8l6_TVPfffwLkmJLM1ppXgD_Wxx0Bpk&usqp=CAU.jpg"
+				height="70" alt="">
+			</a>
+			<div style="font-weight: bold; font-size: 20px" class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active"><a class="nav-link" href="/">Home
+							<span class="sr-only"></span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" target="_blank"
+						href="https://www.saopaulo.sp.gov.br/coronavirus/">COVID-19</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div>
+			<h1 style="text-align: center; font-size: 30px; margin: 40px auto"
+				class="display-6">Tabela de dados</h1>
+		</div>
+		<form th:action="@{/novo-valor}">
+			<div style="text-align: center;">
+				<button style="border: 1px solid black; border-radius: 10px"
+					type="submit" class="btn btn-light">Novo Valor</button>
+			</div>
+		</form>
+
+		<table style="margin: 40px auto" class="table">
+			<thead>
+				<tr>
+					<th scope="col">CPF/CNPJ</th>
+					<th scope="col">NOME/RAZÃO SOCIAL</th>
+					<th scope="col">VALOR TOTAL RECEBIDO</th>
+					<th scope="col">VALOR MÉDIO POR OPERAÇÃO</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="valor : ${valores}">
+					<td th:text="${valor.cpf}"></td>
+					<td th:text="${valor.razaoSocial}"></td>
+					<td th:text="${valor.valor}"></td>
+					<td th:text="${valor.numeroVezes}"></td>
+					<td class="text-center"><a
+						th:href="@{/valor/{id}(id = ${valor.id})}" class="btn btn-primary">editar</a>
+						<a th:href="@{/valor/excluir/{id}(id = ${valor.id})}"
+						class="btn btn btn-danger">excluir</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
